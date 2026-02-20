@@ -12,19 +12,13 @@
 - Mohamed Sherif Salah
 - Mohamed Anwar Mohamed
 
----
-
 ## Instructor
 
 Hesham Mohamed
 
----
-
 ## Project Overview
 
 A smart educational platform that helps students discover the skills best suited to them and turn those skills into practical abilities that can generate real income.
-
----
 
 ## Project Objectives
 
@@ -34,8 +28,6 @@ A smart educational platform that helps students discover the skills best suited
 - TBA
 - TBA
 
----
-
 ## Project Scope
 
 - TBA
@@ -44,11 +36,7 @@ A smart educational platform that helps students discover the skills best suited
 - TBA
 - TBA
 
----
-
 > **Final Deliverable:** TBA
-
----
 
 ## Project Plan (5 Weeks)
 
