@@ -362,3 +362,93 @@ html {
   background-color: var(--purple-gradient-start);
   border-color: var(--purple-gradient-start);
 }
+
+/* Dark mode fixes */
+html[data-bs-theme="dark"],
+body[data-bs-theme="dark"] {
+  background-color: #030712;
+  color: #f9fafb;
+}
+
+[data-bs-theme="dark"] main,
+[data-bs-theme="dark"] .bg-body {
+  background-color: #030712 !important;
+  color: #f9fafb;
+}
+
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .modal-content,
+[data-bs-theme="dark"] .dropdown-menu,
+[data-bs-theme="dark"] .list-group-item {
+  background-color: #111827;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+[data-bs-theme="dark"] .text-muted {
+  color: #9ca3af !important;
+}
+
+[data-bs-theme="dark"] .bg-white,
+[data-bs-theme="dark"] .bg-light,
+[data-bs-theme="dark"] .btn-light {
+  background-color: #1f2937 !important;
+  color: #f9fafb !important;
+  border-color: #374151 !important;
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background-color: #0f172a;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+[data-bs-theme="dark"] .form-control::placeholder {
+  color: #94a3b8;
+}
+
+.theme-toggle-btn {
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--bs-body-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(124, 58, 237, 0.18);
+}
+
+.auth-card {
+  backdrop-filter: blur(16px);
+}
+
+.auth-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1rem;
+  padding: 0.25rem 0.9rem;
+  background: var(--bs-body-bg);
+}
+
+.auth-input-wrap .form-control {
+  border: 0;
+  box-shadow: none !important;
+  background: transparent;
+  padding-left: 0;
+}

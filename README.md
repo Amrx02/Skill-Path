@@ -74,3 +74,72 @@ The initial version (MVP) will include a limited number of skills and basic func
 ### Week 5
 
 - TBA
+
+## How To Run
+
+### 1) Run MongoDB
+
+You need MongoDB running before starting the backend.
+
+#### Local MongoDB
+
+Use this URI:
+
+```env
+MONGO_URI=mongodb://127.0.0.1:27017/skillpath
+```
+
+#### MongoDB Atlas
+
+Create a free MongoDB Atlas cluster, then use a connection string like:
+
+```env
+MONGO_URI=mongodb+srv://USERNAME:PASSWORD@cluster0.xxxxx.mongodb.net/skillpath
+```
+
+Make sure your IP is allowed in MongoDB Atlas Network Access.
+
+### 2) Run Backend
+
+```bash
+cd backend
+cp .env.example .env
+npm install
+npm run dev
+```
+
+Backend runs on:
+
+```txt
+http://localhost:5000
+```
+
+Health check:
+
+```txt
+http://localhost:5000/api/health
+```
+
+Auth endpoints:
+
+```txt
+POST /api/auth/signup
+POST /api/auth/login
+GET  /api/auth/me
+```
+
+### 3) Run Frontend
+
+Open a second terminal from the project root:
+
+```bash
+cp .env.example .env
+npm install
+npm run dev
+```
+
+Frontend runs on:
+
+```txt
+http://localhost:5173
+```

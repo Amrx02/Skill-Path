@@ -1,11 +1,21 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Sparkles, Target, TrendingUp, Users } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
+import { useNavigate } from 'react-router';
 import { skills } from '../data/skills';
 import { Container, Row, Col, Button, Card, Badge } from 'react-bootstrap';
 
 export const LandingPage = () => {
-  const { setIsChatOpen } = useApp();
+  const { setIsChatOpen, user } = useApp();
+  const navigate = useNavigate();
+
+  const startAssessment = () => {
+    if (!user) {
+      navigate('/signup');
+      return;
+    }
+    setIsChatOpen(true);
+  };
 
   const features = [
     {
@@ -65,7 +75,7 @@ export const LandingPage = () => {
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                onClick={() => setIsChatOpen(true)}
+                onClick={startAssessment}
                 size="lg"
                 className="btn-gradient px-5 py-3 rounded-pill shadow-lg"
               >
@@ -209,7 +219,7 @@ export const LandingPage = () => {
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                onClick={() => setIsChatOpen(true)}
+                onClick={startAssessment}
                 size="lg"
                 variant="light"
                 className="px-5 py-3 rounded-pill shadow-lg fw-semibold"

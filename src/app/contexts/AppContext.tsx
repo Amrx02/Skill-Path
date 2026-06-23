@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { api, AuthUser } from '../services/api';
 
 export interface AssessmentData {
   interests: string[];
@@ -37,6 +38,12 @@ interface AppContextType {
   toggleTaskCompletion: (skillId: string, taskId: string, totalTasks: number) => void;
   isChatOpen: boolean;
   setIsChatOpen: (open: boolean) => void;
+  user: AuthUser | null;
+  token: string | null;
+  authLoading: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  signup: (name: string, email: string, password: string) => Promise<void>;
+  logout: () => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -59,6 +66,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [recommendation, setRecommendationState] = useState<SkillRecommendation | null>(null);
   const [taskProgress, setTaskProgress] = useState<TaskProgress>({});
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem('skillpath_token'));
+  const [authLoading, setAuthLoading] = useState(true);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -67,10 +77,11 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const savedRecommendation = localStorage.getItem('recommendation');
     const savedProgress = localStorage.getItem('taskProgress');
 
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-    }
+    const activeTheme = savedTheme || theme;
+    setTheme(activeTheme);
+    document.documentElement.classList.toggle('dark', activeTheme === 'dark');
+    document.documentElement.setAttribute('data-bs-theme', activeTheme);
+    document.body.setAttribute('data-bs-theme', activeTheme);
     if (savedAssessment) {
       setAssessmentDataState(JSON.parse(savedAssessment));
     }
@@ -82,11 +93,36 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }, []);
 
+
+  useEffect(() => {
+    const loadCurrentUser = async () => {
+      if (!token) {
+        setAuthLoading(false);
+        return;
+      }
+
+      try {
+        const data = await api.me();
+        setUser(data.user);
+      } catch {
+        localStorage.removeItem('skillpath_token');
+        setToken(null);
+        setUser(null);
+      } finally {
+        setAuthLoading(false);
+      }
+    };
+
+    loadCurrentUser();
+  }, [token]);
+
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    document.documentElement.setAttribute('data-bs-theme', newTheme);
+    document.body.setAttribute('data-bs-theme', newTheme);
   };
 
   const setAssessmentData = (data: AssessmentData) => {
@@ -124,6 +160,27 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     });
   };
 
+
+  const login = async (email: string, password: string) => {
+    const data = await api.login({ email, password });
+    localStorage.setItem('skillpath_token', data.token);
+    setToken(data.token);
+    setUser(data.user);
+  };
+
+  const signup = async (name: string, email: string, password: string) => {
+    const data = await api.signup({ name, email, password });
+    localStorage.setItem('skillpath_token', data.token);
+    setToken(data.token);
+    setUser(data.user);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('skillpath_token');
+    setToken(null);
+    setUser(null);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -137,6 +194,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         toggleTaskCompletion,
         isChatOpen,
         setIsChatOpen,
+        user,
+        token,
+        authLoading,
+        login,
+        signup,
+        logout,
       }}
     >
       {children}
