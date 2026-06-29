@@ -1,14 +1,14 @@
 import { useParams, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import { Download, ExternalLink, Clock, BookOpen, CheckCircle2 } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
+import { useLearningPath } from '../contexts/LearningPathContext';
 import { getSkillById, getRoadmapBySkillId } from '../data/skills';
 import { Container, Row, Col, Card, Button, ProgressBar, Accordion, Form, Badge } from 'react-bootstrap';
 
 export const RoadmapPage = () => {
   const { skillId } = useParams<{ skillId: string }>();
   const navigate = useNavigate();
-  const { taskProgress, toggleTaskCompletion } = useApp();
+  const { taskProgress, toggleTaskCompletion } = useLearningPath();
 
   if (!skillId) {
     navigate('/');

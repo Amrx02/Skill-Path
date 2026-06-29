@@ -3,11 +3,11 @@ import { Link, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import { Lock, Mail, User, GraduationCap } from 'lucide-react';
 import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
-import { useApp } from '../contexts/AppContext';
+import { useAuth } from '../contexts/AuthContext';
 
 export const SignupPage = () => {
   const navigate = useNavigate();
-  const { signup } = useApp();
+  const { signup } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

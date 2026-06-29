@@ -1,9 +1,9 @@
 import { Navigate, Outlet, useLocation } from 'react-router';
 import { Container, Spinner } from 'react-bootstrap';
-import { useApp } from '../contexts/AppContext';
+import { useAuth } from '../contexts/AuthContext';
 
 export const ProtectedRoute = () => {
-  const { user, authLoading } = useApp();
+  const { user, authLoading } = useAuth();
   const location = useLocation();
 
   if (authLoading) {

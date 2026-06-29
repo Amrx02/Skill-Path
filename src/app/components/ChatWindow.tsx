@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { X, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useApp } from '../contexts/AppContext';
+import { useChat } from '../contexts/ChatContext';
+import { useLearningPath } from '../contexts/LearningPathContext';
 import { useNavigate } from 'react-router';
 import { skills } from '../data/skills';
 import { Card, Form, Button, InputGroup } from 'react-bootstrap';
@@ -23,7 +24,8 @@ interface AssessmentState {
 }
 
 export const ChatWindow = () => {
-  const { setIsChatOpen, setAssessmentData, setRecommendation } = useApp();
+  const { setIsChatOpen } = useChat();
+  const { setAssessmentData, setRecommendation } = useLearningPath();
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');

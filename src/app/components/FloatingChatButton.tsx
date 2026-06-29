@@ -1,9 +1,9 @@
 import { MessageCircle } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useApp } from '../contexts/AppContext';
+import { useChat } from '../contexts/ChatContext';
 
 export const FloatingChatButton = () => {
-  const { isChatOpen, setIsChatOpen } = useApp();
+  const { isChatOpen, setIsChatOpen } = useChat();
 
   if (isChatOpen) return null;
 

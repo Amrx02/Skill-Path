@@ -1,12 +1,14 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Sparkles, Target, TrendingUp, Users } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
+import { useChat } from '../contexts/ChatContext';
+import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router';
 import { skills } from '../data/skills';
 import { Container, Row, Col, Button, Card, Badge } from 'react-bootstrap';
 
 export const LandingPage = () => {
-  const { setIsChatOpen, user } = useApp();
+  const { setIsChatOpen } = useChat();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const startAssessment = () => {

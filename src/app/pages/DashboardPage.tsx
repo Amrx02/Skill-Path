@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import { Trophy, Target, TrendingUp, Calendar, Award, Star } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
+import { useLearningPath } from '../contexts/LearningPathContext';
 import { getSkillById, getRoadmapBySkillId } from '../data/skills';
 import { Container, Row, Col, Card, Button, ProgressBar, Badge } from 'react-bootstrap';
 
 export const DashboardPage = () => {
-  const { recommendation, taskProgress } = useApp();
+  const { recommendation, taskProgress } = useLearningPath();
   const navigate = useNavigate();
 
   if (!recommendation) {

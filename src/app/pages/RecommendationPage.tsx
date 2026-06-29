@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router';
-import { useApp } from '../contexts/AppContext';
+import { useLearningPath } from '../contexts/LearningPathContext';
 import { motion } from 'motion/react';
 import { ArrowRight, Clock, DollarSign, TrendingUp, CheckCircle } from 'lucide-react';
 import { getSkillById } from '../data/skills';
 import { Container, Row, Col, Card, Button, ProgressBar, ListGroup } from 'react-bootstrap';
 
 export const RecommendationPage = () => {
-  const { recommendation } = useApp();
+  const { recommendation } = useLearningPath();
   const navigate = useNavigate();
 
   if (!recommendation) {

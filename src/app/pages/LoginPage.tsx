@@ -3,12 +3,12 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import { Lock, Mail, GraduationCap } from 'lucide-react';
 import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
-import { useApp } from '../contexts/AppContext';
+import { useAuth } from '../contexts/AuthContext';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login } = useApp();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

@@ -1,10 +1,14 @@
 import { Link, useLocation, useNavigate } from 'react-router';
 import { Moon, Sun, GraduationCap, LogOut, UserCircle } from 'lucide-react';
-import { useApp } from '../contexts/AppContext';
+import { useLearningPath } from '../contexts/LearningPathContext';
+import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import { Navbar as BsNavbar, Container, Nav, Button } from 'react-bootstrap';
 
 export const Navbar = () => {
-  const { theme, toggleTheme, recommendation, user, logout } = useApp();
+  const { recommendation } = useLearningPath();
+  const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
 
